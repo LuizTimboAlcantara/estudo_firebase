@@ -8,12 +8,14 @@ let userContent = document.getElementById("userContent");
 let userEmail = document.getElementById("userEmail");
 let emailVerified = document.getElementById("emailVerified");
 let sendEmailVerificationDiv = document.getElementById("sendEmailVerificationDiv");
+let passwordReset = document.getElementById("passwordReset");
 
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
   authFormTitle.innerHTML = "Insira seus dados para se cadastrar";
 
   hiddenItem(register);
+  hiddenItem(passwordReset);
   showItem(access);
 }
 
@@ -22,6 +24,7 @@ function toggleToAccess() {
   authFormTitle.innerHTML = "Acesse  a sua conta para continuar";
 
   hiddenItem(access);
+  showItem(passwordReset);
   showItem(register);
 }
 
