@@ -53,3 +53,7 @@ function showAuth() {
   hiddenItem(userContent);
   showItem(auth);
 }
+
+let actionCodeSettings = {
+  url: "http://127.0.0.1:5500/",
+};

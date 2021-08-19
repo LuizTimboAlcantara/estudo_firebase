@@ -1,3 +1,5 @@
+firebase.auth().languageCode = "pt-BR";
+
 authForm.onsubmit = function (event) {
   showItem(loading);
 
@@ -47,7 +49,7 @@ async function sendEmailVerification() {
   showItem(loading);
 
   try {
-    await user.sendEmailVerification();
+    await user.sendEmailVerification(actionCodeSettings);
 
     alert(`E-mail de verificação foi enviado para ${user.email}! Verifique a sua caixa de entrada`);
   } catch (error) {
