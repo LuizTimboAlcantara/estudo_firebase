@@ -24,9 +24,18 @@ authForm.onsubmit = function (event) {
 firebase.auth().onAuthStateChanged(function (user) {
   hiddenItem(loading);
   if (user) {
-    console.log("Usuário autenticado");
-    console.log(user);
+    showUserContent(user);
   } else {
-    console.log("Usuário não autenticado");
+    showAuth();
   }
 });
+
+function signOut() {
+  firebase
+    .auth()
+    .signOut()
+    .catch(function (error) {
+      console.log("Falha ao sair");
+      console.log(error);
+    });
+}
