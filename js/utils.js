@@ -6,6 +6,8 @@ let loading = document.getElementById("loading");
 let auth = document.getElementById("auth");
 let userContent = document.getElementById("userContent");
 let userEmail = document.getElementById("userEmail");
+let emailVerified = document.getElementById("emailVerified");
+let sendEmailVerificationDiv = document.getElementById("sendEmailVerificationDiv");
 
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -32,6 +34,14 @@ function showItem(element) {
 }
 
 function showUserContent(user) {
+  if (user.emailVerified) {
+    emailVerified.innerHTML = "E-mail verificado";
+    hiddenItem(sendEmailVerificationDiv);
+  } else {
+    emailVerified.innerHTML = "E-mail não verificado";
+    showItem(sendEmailVerificationDiv);
+  }
+
   userEmail.innerHTML = user.email;
   hiddenItem(auth);
   showItem(userContent);

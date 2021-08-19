@@ -9,6 +9,7 @@ authForm.onsubmit = function (event) {
       .catch(function (error) {
         console.log("Falha no acesso");
         console.log(error);
+        hideItem(loading);
       });
   } else {
     firebase
@@ -17,6 +18,7 @@ authForm.onsubmit = function (event) {
       .catch(function (error) {
         console.log("Falha no cadastro");
         console.log(error);
+        hideItem(loading);
       });
   }
 };
@@ -38,4 +40,20 @@ function signOut() {
       console.log("Falha ao sair");
       console.log(error);
     });
+}
+
+async function sendEmailVerification() {
+  let user = firebase.auth().currentUser;
+  showItem(loading);
+
+  try {
+    await user.sendEmailVerification();
+
+    alert(`E-mail de verificação foi enviado para ${user.email}! Verifique a sua caixa de entrada`);
+  } catch (error) {
+    alert("Houve um erro ao enviar o e-mail de verificação");
+    console.log(error);
+  } finally {
+    hiddenItem(loading);
+  }
 }
