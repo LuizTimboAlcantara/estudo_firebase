@@ -2,6 +2,7 @@ let authForm = document.getElementById("authForm");
 let authFormTitle = document.getElementById("authFormTitle");
 let register = document.getElementById("register");
 let access = document.getElementById("access");
+let loading = document.getElementById("loading");
 
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -20,9 +21,9 @@ function toggleToAccess() {
 }
 
 function hiddenItem(element) {
-  element.style.display = "block";
+  element.style.display = "none";
 }
 
 function showItem(element) {
-  element.style.display = "none";
+  element.style.display = "block";
 }

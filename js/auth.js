@@ -1,19 +1,32 @@
-authForm.onsubmit = async function (event) {
-  event.preventDefault();
+authForm.onsubmit = function (event) {
+  showItem(loading);
 
+  event.preventDefault();
   if (authForm.submitAuthForm.innerHTML == "Acessar") {
-    try {
-      const user = await firebase.auth().signInWithEmailAndPassword(authForm.email.value, authForm.password.value);
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-    }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(authForm.email.value, authForm.password.value)
+      .catch(function (error) {
+        console.log("Falha no acesso");
+        console.log(error);
+      });
   } else {
-    try {
-      const user = await firebase.auth().createUserWithEmailAndPassword(authForm.email.value, authForm.password.value);
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-    }
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(authForm.email.value, authForm.password.value)
+      .catch(function (error) {
+        console.log("Falha no cadastro");
+        console.log(error);
+      });
   }
 };
+
+firebase.auth().onAuthStateChanged(function (user) {
+  hiddenItem(loading);
+  if (user) {
+    console.log("Usuário autenticado");
+    console.log(user);
+  } else {
+    console.log("Usuário não autenticado");
+  }
+});
