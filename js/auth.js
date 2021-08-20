@@ -80,3 +80,14 @@ function sendPasswordResetEmail() {
     alert("É preciso preencher o campo de e-mail para redefinir a senha!");
   }
 }
+
+function signInWithGoogle() {
+  showItem(loading);
+  try {
+    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  } catch (error) {
+    alert("Erro ao tentar autenticar com o Google");
+    console.log("🚀 ~ file: auth.js ~ line 89 ~ signInWithGoogle ~ error", error);
+    hiddenItem(loading);
+  }
+}

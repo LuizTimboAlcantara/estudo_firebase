@@ -66,3 +66,13 @@ p {
   left: calc(50% - 100px);
   z-index: 1;
 }
+
+#auth img {
+  cursor: pointer;
+  margin: 4px;
+}
+
+#userImg {
+  height: 40px;
+  border-radius: 100%;
+}

@@ -9,6 +9,8 @@ let userEmail = document.getElementById("userEmail");
 let emailVerified = document.getElementById("emailVerified");
 let sendEmailVerificationDiv = document.getElementById("sendEmailVerificationDiv");
 let passwordReset = document.getElementById("passwordReset");
+let userImg = document.getElementById("userImg");
+let userName = document.getElementById("userName");
 
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -44,6 +46,9 @@ function showUserContent(user) {
     emailVerified.innerHTML = "E-mail não verificado";
     showItem(sendEmailVerificationDiv);
   }
+
+  userImg.src = user.photoURL ? user.photoURL : "img/unknownUser.png";
+  userName.innerHTML = user.displayName;
 
   userEmail.innerHTML = user.email;
   hiddenItem(auth);
