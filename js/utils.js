@@ -39,12 +39,18 @@ function showItem(element) {
 }
 
 function showUserContent(user) {
-  if (user.emailVerified) {
-    emailVerified.innerHTML = "E-mail verificado";
+  if (user.providerData[0].id != "password") {
+    emailVerified.innerHTML =
+      "Autentição por provedor confiável, não é necessário verificar e-mail";
     hiddenItem(sendEmailVerificationDiv);
   } else {
-    emailVerified.innerHTML = "E-mail não verificado";
-    showItem(sendEmailVerificationDiv);
+    if (user.emailVerified) {
+      emailVerified.innerHTML = "E-mail verificado";
+      hiddenItem(sendEmailVerificationDiv);
+    } else {
+      emailVerified.innerHTML = "E-mail não verificado";
+      showItem(sendEmailVerificationDiv);
+    }
   }
 
   userImg.src = user.photoURL ? user.photoURL : "img/unknownUser.png";

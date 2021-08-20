@@ -91,3 +91,14 @@ function signInWithGoogle() {
     hiddenItem(loading);
   }
 }
+
+function signInWithGitHub() {
+  showItem(loading);
+  try {
+    firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
+  } catch (error) {
+    alert("Erro ao tentar autenticar com o GitHub");
+    console.log("🚀 ~ file: auth.js ~ line 89 ~ signInWithGoogle ~ error", error);
+    hiddenItem(loading);
+  }
+}

@@ -72,6 +72,10 @@ p {
   margin: 4px;
 }
 
+#auth img:hover {
+  opacity: 0.75;
+}
+
 #userImg {
   height: 40px;
   border-radius: 100%;
