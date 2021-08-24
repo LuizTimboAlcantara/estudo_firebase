@@ -9,8 +9,7 @@ authForm.onsubmit = function (event) {
       .auth()
       .signInWithEmailAndPassword(authForm.email.value, authForm.password.value)
       .catch(function (error) {
-        console.log("Falha no acesso");
-        console.log(error);
+        showError("Falha no acesso: ", error);
         hideItem(loading);
       });
   } else {
@@ -18,8 +17,7 @@ authForm.onsubmit = function (event) {
       .auth()
       .createUserWithEmailAndPassword(authForm.email.value, authForm.password.value)
       .catch(function (error) {
-        console.log("Falha no cadastro");
-        console.log(error);
+        showError("Falha no cadastro: ", error);
         hideItem(loading);
       });
   }
@@ -39,8 +37,7 @@ function signOut() {
     .auth()
     .signOut()
     .catch(function (error) {
-      console.log("Falha ao sair");
-      console.log(error);
+      showError("Falha ao sair: ", error);
     });
 }
 
@@ -55,8 +52,7 @@ async function sendEmailVerification() {
       `E-mail de verificação foi enviado para ${user.email}! Verifique a sua caixa de entrada`
     );
   } catch (error) {
-    alert("Houve um erro ao enviar o e-mail de verificação");
-    console.log(error);
+    showError("Houve um erro ao enviar o e-mail de verificação: ", error);
   } finally {
     hiddenItem(loading);
   }
@@ -76,8 +72,7 @@ function sendPasswordResetEmail() {
 
       alert(`E-mail de redefinição de senha foi enviado para ${email}`);
     } catch (error) {
-      alert("Houve um erro ao enviar e-mail de redefinição de senha!");
-      console.log("🚀 ~ file: auth.js ~ line 74 ~ sendPasswordResetEmail ~ error", error);
+      showError("Houve um erro ao enviar e-mail de redefinição de senha!", error);
     } finally {
       hiddenItem(loading);
     }
@@ -91,8 +86,7 @@ function signInWithGoogle() {
   try {
     firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
   } catch (error) {
-    alert("Erro ao tentar autenticar com o Google");
-    console.log("🚀 ~ file: auth.js ~ line 89 ~ signInWithGoogle ~ error", error);
+    showError("Erro ao tentar autenticar com o Google.", error);
     hiddenItem(loading);
   }
 }
@@ -102,8 +96,7 @@ function signInWithGitHub() {
   try {
     firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
   } catch (error) {
-    alert("Erro ao tentar autenticar com o GitHub");
-    console.log("🚀 ~ file: auth.js ~ line 105 ~ signInWithGitHub ~ error", error);
+    showError("Erro ao tentar autenticar com o GitHub.", error);
     hiddenItem(loading);
   }
 }
@@ -113,8 +106,7 @@ function signInWithFacebook() {
   try {
     firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider());
   } catch (error) {
-    alert("Erro ao tentar autenticar com o Facebook");
-    console.log("🚀 ~ file: auth.js ~ line 116 ~ signInWithFacebook ~ error", error);
+    showError("Erro ao tentar autenticar com o Facebook.", error);
     hiddenItem(loading);
   }
 }
@@ -134,8 +126,7 @@ function updateUserName() {
       displayName: newUserName,
     });
   } catch (error) {
-    alert("Erro ao tentar autenticar com o GitHub");
-    console.log("🚀 ~ file: auth.js ~ line 134 ~ updateUserName ~ error", error);
+    showError("Falha na atualização do usuário.", error);
   } finally {
     hiddenItem(loading);
   }
@@ -152,8 +143,7 @@ function deleteUserAccount() {
         alert("Conta foi removida com sucesso");
       }
     } catch (error) {
-      alert("Erro ao remover a conta");
-      console.log("🚀 ~ file: auth.js ~ line 153 ~ deleteUserAccount ~ error", error);
+      showError("Erro ao remover a conta.", error);
     } finally {
       hiddenItem(loading);
     }

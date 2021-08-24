@@ -68,6 +68,36 @@ function showAuth() {
   showItem(auth);
 }
 
+function showError(prefix, error) {
+  console.log(error.code);
+  hiddenItem(loading);
+
+  switch (error.code) {
+    case "auth/invalid-email":
+    case "auth/wrong-password":
+      alert(`${prefix} E-mail ou senha inválidos.`);
+      break;
+
+    case "auth/weak-password":
+      alert(`${prefix} A senha deve possuir no mínimo 6 caracteres.`);
+      break;
+
+    case "auth/email-already-in-use":
+      alert(`${prefix} E-mail já existe.`);
+      break;
+
+    case "auth/popup-closed-by-user":
+      alert(
+        `${prefix} O popup de autenticação foi fechado antes da operação ser concluída.`
+      );
+      break;
+
+    default:
+      alert(`${prefix} ${error.message}`);
+      break;
+  }
+}
+
 let actionCodeSettings = {
   url: "http://127.0.0.1:5500/",
 };
