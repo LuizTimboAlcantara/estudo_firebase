@@ -14,6 +14,8 @@ let userName = document.getElementById("userName");
 
 // Form Todo
 let todoForm = document.getElementById("todoForm");
+let todoCount = document.getElementById("todoCount");
+let ulTodoList = document.getElementById("ulTodoList");
 
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -61,6 +63,13 @@ function showUserContent(user) {
 
   userEmail.innerHTML = user.email;
   hiddenItem(auth);
+
+  dbRefUsers
+    .child(firebase.auth().currentUser.uid)
+    .on("value", function (dataSnapshot) {
+      fillTodoList(dataSnapshot);
+    });
+
   showItem(userContent);
 }
 

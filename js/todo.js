@@ -9,9 +9,26 @@ todoForm.onsubmit = function (event) {
 
       console.log(`Tarefa ${data.name} adicionada com sucesso!`);
     } catch (error) {
-      console.log("🚀 ~ file: todo.js ~ line 12 ~ error", error);
+      showError("Falha ai adicionar tarefa", error);
     }
   } else {
     alert("O nome da tarefa não pode ser vazia!");
   }
 };
+
+function fillTodoList(dataSnapshot) {
+  ulTodoList.innerHTML = "";
+  let count = dataSnapshot.numChildren();
+  todoCount.innerHTML = count + (count + 1 ? " tarefas" : " tarefa") + ":";
+
+  dataSnapshot.forEach(function (item) {
+    let value = item.val();
+
+    let li = document.createElement("li");
+    let spanLi = document.createElement("span");
+
+    spanLi.appendChild(document.createTextNode(value.name));
+    li.appendChild(spanLi);
+    ulTodoList.appendChild(li);
+  });
+}
