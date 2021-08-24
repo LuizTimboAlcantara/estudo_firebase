@@ -51,7 +51,9 @@ async function sendEmailVerification() {
   try {
     await user.sendEmailVerification(actionCodeSettings);
 
-    alert(`E-mail de verificação foi enviado para ${user.email}! Verifique a sua caixa de entrada`);
+    alert(
+      `E-mail de verificação foi enviado para ${user.email}! Verifique a sua caixa de entrada`
+    );
   } catch (error) {
     alert("Houve um erro ao enviar o e-mail de verificação");
     console.log(error);
@@ -61,7 +63,10 @@ async function sendEmailVerification() {
 }
 
 function sendPasswordResetEmail() {
-  let email = prompt("Redefinir senha! Informe o seu endereço de e-mail.", authForm.email.value);
+  let email = prompt(
+    "Redefinir senha! Informe o seu endereço de e-mail.",
+    authForm.email.value
+  );
 
   if (email) {
     showItem(loading);
@@ -98,7 +103,40 @@ function signInWithGitHub() {
     firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
   } catch (error) {
     alert("Erro ao tentar autenticar com o GitHub");
-    console.log("🚀 ~ file: auth.js ~ line 89 ~ signInWithGoogle ~ error", error);
+    console.log("🚀 ~ file: auth.js ~ line 105 ~ signInWithGitHub ~ error", error);
+    hiddenItem(loading);
+  }
+}
+
+function signInWithFacebook() {
+  showItem(loading);
+  try {
+    firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider());
+  } catch (error) {
+    alert("Erro ao tentar autenticar com o Facebook");
+    console.log("🚀 ~ file: auth.js ~ line 116 ~ signInWithFacebook ~ error", error);
+    hiddenItem(loading);
+  }
+}
+
+function updateUserName() {
+  let newUserName = prompt("Informe um novo nome de usuário.", userName.innerHTML);
+
+  if (newUserName && newUserName != "") {
+    userName.innerHTML = newUserName;
+  } else {
+    alert("O nome não pode ser vazio");
+  }
+
+  showItem(loading);
+  try {
+    firebase.auth().currentUser.updateProfile({
+      displayName: newUserName,
+    });
+  } catch (error) {
+    alert("Erro ao tentar autenticar com o GitHub");
+    console.log("🚀 ~ file: auth.js ~ line 134 ~ updateUserName ~ error", error);
+  } finally {
     hiddenItem(loading);
   }
 }

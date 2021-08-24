@@ -40,18 +40,35 @@
 
         <p id="register">
           Não possui uma conta?
-          <button onclick="toggleToRegister()" class="alternative">Cadastrar uma nova conta</button>
+          <button onclick="toggleToRegister()" class="alternative">
+            Cadastrar uma nova conta
+          </button>
         </p>
 
         <p id="access" class="startHidden">
           Já possui uma conta?
-          <button onclick="toggleToAccess()" class="alternative">Acesse a sua conta</button>
+          <button onclick="toggleToAccess()" class="alternative">
+            Acesse a sua conta
+          </button>
         </p>
 
         <p>
           Ou acesse usando:<br />
-          <img src="img/google.png" alt="Autenticação pelo Google" onclick="signInWithGoogle()" />
-          <img src="img/github.png" alt="Autenticação pelo GitHub" onclick="signInWithGitHub()" />
+          <img
+            src="img/google.png"
+            alt="Autenticação pelo Google"
+            onclick="signInWithGoogle()"
+          />
+          <img
+            src="img/github.png"
+            alt="Autenticação pelo GitHub"
+            onclick="signInWithGitHub()"
+          />
+          <img
+            src="img/facebook.png"
+            alt="Autenticação pelo Facebook"
+            onclick="signInWithFacebook()"
+          />
         </p>
       </div>
 
@@ -63,8 +80,13 @@
           <p id="userEmail"></p>
           <p id="emailVerified"></p>
           <div id="sendEmailVerificationDiv">
-            <button class="alternative" onclick="sendEmailVerification()">Verificar e-mail</button>
+            <button class="alternative" onclick="sendEmailVerification()">
+              Verificar e-mail
+            </button>
           </div>
+          <button onclick="updateUserName()" class="alternative">
+            Atualizar meu nome
+          </button>
           <button onclick="signOut()" class="alternative">Sair</button>
         </div>
       </div>
