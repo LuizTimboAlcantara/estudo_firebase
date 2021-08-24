@@ -12,6 +12,9 @@ let passwordReset = document.getElementById("passwordReset");
 let userImg = document.getElementById("userImg");
 let userName = document.getElementById("userName");
 
+// Form Todo
+let todoForm = document.getElementById("todoForm");
+
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
   authFormTitle.innerHTML = "Insira seus dados para se cadastrar";
@@ -101,3 +104,6 @@ function showError(prefix, error) {
 let actionCodeSettings = {
   url: "http://127.0.0.1:5500/",
 };
+
+let database = firebase.database();
+let dbRefUsers = database.ref("users");
