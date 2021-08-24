@@ -140,3 +140,22 @@ function updateUserName() {
     hiddenItem(loading);
   }
 }
+
+function deleteUserAccount() {
+  let confirmation = confirm("Relamente deseja excluir a sua conta?");
+
+  if (confirmation) {
+    showItem(loading);
+
+    try {
+      if (firebase.auth().currentUser.delete()) {
+        alert("Conta foi removida com sucesso");
+      }
+    } catch (error) {
+      alert("Erro ao remover a conta");
+      console.log("🚀 ~ file: auth.js ~ line 153 ~ deleteUserAccount ~ error", error);
+    } finally {
+      hiddenItem(loading);
+    }
+  }
+}
