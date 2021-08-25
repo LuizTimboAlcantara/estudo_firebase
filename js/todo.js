@@ -28,7 +28,29 @@ function fillTodoList(dataSnapshot) {
     let spanLi = document.createElement("span");
 
     spanLi.appendChild(document.createTextNode(value.name));
+    spanLi.id = item.key;
     li.appendChild(spanLi);
+
+    let liRemoveBtn = document.createElement("button");
+    liRemoveBtn.appendChild(document.createTextNode("Excluir"));
+    liRemoveBtn.setAttribute("onclick", 'removeTodo("' + item.key + '")');
+    liRemoveBtn.setAttribute("class", "danger todoBtn");
+    li.appendChild(liRemoveBtn);
+
     ulTodoList.appendChild(li);
   });
+}
+
+function removeTodo(key) {
+  let selectedItem = document.getElementById(key);
+  let confirmation = confirm(
+    `Realmente deseja remover a tarefa? "${selectedItem.innerHTML}"`
+  );
+  if (confirmation) {
+    try {
+      dbRefUsers.child(firebase.auth().currentUser.uid).child(key).remove();
+    } catch (error) {
+      showError("Falha ao remover a tarefa", error);
+    }
+  }
 }
