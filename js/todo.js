@@ -11,6 +11,8 @@ todoForm.onsubmit = function (event) {
     } catch (error) {
       showError("Falha ai adicionar tarefa", error);
     }
+
+    todoForm.name.value = "";
   } else {
     alert("O nome da tarefa não pode ser vazia!");
   }
@@ -37,6 +39,12 @@ function fillTodoList(dataSnapshot) {
     liRemoveBtn.setAttribute("class", "danger todoBtn");
     li.appendChild(liRemoveBtn);
 
+    let liUpdateBtn = document.createElement("button");
+    liUpdateBtn.appendChild(document.createTextNode("Editar"));
+    liUpdateBtn.setAttribute("onclick", 'updateTodo("' + item.key + '")');
+    liUpdateBtn.setAttribute("class", "alternative todoBtn");
+    li.appendChild(liUpdateBtn);
+
     ulTodoList.appendChild(li);
   });
 }
@@ -52,5 +60,26 @@ function removeTodo(key) {
     } catch (error) {
       showError("Falha ao remover a tarefa", error);
     }
+  }
+}
+
+function updateTodo(key) {
+  let selectedItem = document.getElementById(key);
+  let newTodoName = prompt(
+    `Escolha um novo nome para a tarefa ${selectedItem.innerHTML}`,
+    selectedItem.innerHTML
+  );
+
+  if (newTodoName != "") {
+    let data = { name: newTodoName };
+
+    try {
+      dbRefUsers.child(firebase.auth().currentUser.uid).child(key).update(data);
+      console.log(`Tarefa "${data.name}" atualizada com sucesso!`);
+    } catch (error) {
+      showError("Falha ao atualizar tarefa:", error);
+    }
+  } else {
+    alert("Defina um nome para a tarefa!");
   }
 }
