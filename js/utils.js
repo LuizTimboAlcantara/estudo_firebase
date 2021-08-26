@@ -70,12 +70,14 @@ function showUserContent(user) {
   getDefaultTodoList();
   search.onkeyup = function () {
     if (search.value != "") {
+      let searchText = search.value.toLowerCase();
+
       //! Busca tarefas filtradas somente uma vez;
       dbRefUsers
         .child(user.uid)
-        .orderByChild("name") //! Ordenando tarefas pelo nome;
-        .startAt(search.value)
-        .endAt(search.value + "\uf8ff") //! Filtra com base no que foi digitado;
+        .orderByChild("nameLowerCase") //! Ordenando tarefas pelo nome;
+        .startAt(searchText)
+        .endAt(searchText + "\uf8ff") //! Filtra com base no que foi digitado;
         .once("value")
         .then(function (dataSnapshot) {
           fillTodoList(dataSnapshot);

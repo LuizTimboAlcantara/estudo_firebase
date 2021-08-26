@@ -1,8 +1,12 @@
-todoForm.onsubmit = function (event) {
+//!trata a submissão do formulário de autenticação;
+odoForm.onsubmit = function (event) {
   event.preventDefault();
 
   if (todoForm.name.value !== "") {
-    let data = { name: todoForm.name.value };
+    let data = {
+      name: todoForm.name.value,
+      nameLowerCase: todoForm.name.value.toLowerCase(),
+    };
 
     try {
       dbRefUsers.child(firebase.auth().currentUser.uid).push(data);
@@ -18,6 +22,7 @@ todoForm.onsubmit = function (event) {
   }
 };
 
+//! Exibe a lista de tarefas do usuário;
 function fillTodoList(dataSnapshot) {
   ulTodoList.innerHTML = "";
   let count = dataSnapshot.numChildren();
@@ -71,7 +76,10 @@ function updateTodo(key) {
   );
 
   if (newTodoName != "") {
-    let data = { name: newTodoName };
+    let data = {
+      name: newTodoName,
+      nameLowerCase: newTodoName.toLowerCase(),
+    };
 
     try {
       dbRefUsers.child(firebase.auth().currentUser.uid).child(key).update(data);

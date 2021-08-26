@@ -38,3 +38,20 @@
 }
 }
 }
+
+# Acesso restrito ao dono dos dados(filtragem e ordenação de dados)
+
+{
+"rules":{
+"users":{
+"$uid":{
+            ".read":"$uid == auth.uid",
+".write":"$uid == auth.uid",
+            ".indexOn":"nameLowerCase",
+            "$tid":{
+".validate":"newData.child('name').isString() && newData.child('name').val().length <= 30 && newData.child('nameLowerCase').isString() && newData.child('nameLowerCase').val().length <= 30"
+}
+}
+}
+}
+}
