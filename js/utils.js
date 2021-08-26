@@ -12,10 +12,12 @@ let passwordReset = document.getElementById("passwordReset");
 let userImg = document.getElementById("userImg");
 let userName = document.getElementById("userName");
 
-// Form Todo
+//* Form Todo
 let todoForm = document.getElementById("todoForm");
 let todoCount = document.getElementById("todoCount");
 let ulTodoList = document.getElementById("ulTodoList");
+
+let search = document.getElementById("search");
 
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
@@ -43,6 +45,7 @@ function showItem(element) {
   element.style.display = "block";
 }
 
+//! Mostra conteúdo para usuários autenticados;
 function showUserContent(user) {
   if (user.providerData[0].id != "password") {
     emailVerified.innerHTML =
@@ -64,15 +67,37 @@ function showUserContent(user) {
   userEmail.innerHTML = user.email;
   hiddenItem(auth);
 
+  getDefaultTodoList();
+  search.onkeyup = function () {
+    if (search.value != "") {
+      //! Busca tarefas filtradas somente uma vez;
+      dbRefUsers
+        .child(user.uid)
+        .orderByChild("name") //! Ordenando tarefas pelo nome;
+        .startAt(search.value)
+        .endAt(search.value + "\uf8ff") //! Filtra com base no que foi digitado;
+        .once("value")
+        .then(function (dataSnapshot) {
+          fillTodoList(dataSnapshot);
+        });
+    } else {
+      getDefaultTodoList();
+    }
+  };
+
+  showItem(userContent);
+}
+
+//!Busca tarefas em tempo real(listagem padrão);
+function getDefaultTodoList() {
   dbRefUsers
     .child(firebase.auth().currentUser.uid)
     .on("value", function (dataSnapshot) {
       fillTodoList(dataSnapshot);
     });
-
-  showItem(userContent);
 }
 
+//! Mostrar conteúdo para usuários não autenticados;
 function showAuth() {
   authForm.email.value = "";
   authForm.password.value = "";
