@@ -1,8 +1,19 @@
-//!trata a submissão do formulário de autenticação;
-odoForm.onsubmit = function (event) {
+// !trata a submissão do formulário de autenticação;
+todoForm.onsubmit = function (event) {
   event.preventDefault();
 
+  let file = todoForm.file.files[0];
   if (todoForm.name.value !== "") {
+    if (file != null) {
+      if (file.type.includes("image")) {
+        let imgName = `${firebase.database().ref().push().key}-${file.name}`;
+        let imgPath = `todoListFiles/${firebase.auth().currentUser.uid}/${imgName}`;
+
+        let storageRef = firebase.storage().ref(imgPath);
+        storageRef.put(file);
+      }
+    }
+
     let data = {
       name: todoForm.name.value,
       nameLowerCase: todoForm.name.value.toLowerCase(),
