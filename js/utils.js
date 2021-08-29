@@ -1,3 +1,4 @@
+//* Referencias
 let authForm = document.getElementById("authForm");
 let authFormTitle = document.getElementById("authFormTitle");
 let register = document.getElementById("register");
@@ -11,13 +12,12 @@ let sendEmailVerificationDiv = document.getElementById("sendEmailVerificationDiv
 let passwordReset = document.getElementById("passwordReset");
 let userImg = document.getElementById("userImg");
 let userName = document.getElementById("userName");
-
-//* Form Todo
 let todoForm = document.getElementById("todoForm");
 let todoCount = document.getElementById("todoCount");
 let ulTodoList = document.getElementById("ulTodoList");
-
 let search = document.getElementById("search");
+let progressFeedBack = document.getElementById("progressFeedBack");
+let progress = document.getElementById("progress");
 
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
