@@ -50,13 +50,38 @@ function trackUpload(upload) {
 
     function (error) {
       showError("Houve uma falha no upload da imagem", error);
+      hiddenItem(progressFeedBack);
     },
 
     function () {
-      hiddenItem(progressFeedBack);
       console.log("Sucesso no upload!");
+      hiddenItem(progressFeedBack);
     }
   );
+
+  //! Pausando o upload;
+  let playPauseUpload = true;
+  playPauseBtn.onclick = function () {
+    playPauseUpload = !playPauseUpload;
+
+    if (playPauseUpload) {
+      upload.resume();
+
+      playPauseBtn.innerHTML = "Pausar";
+    } else {
+      upload.pause();
+
+      playPauseBtn.innerHTML = "Continuar";
+    }
+  };
+
+  //! Cancelando um upload;
+  cancelBtn.onclick = function () {
+    upload.cancel();
+
+    alert("Upload cancelado pelo usuário");
+    hiddenItem(progressFeedBack);
+  };
 }
 
 //! Exibe a lista de tarefas do usuário;

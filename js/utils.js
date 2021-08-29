@@ -18,6 +18,8 @@ let ulTodoList = document.getElementById("ulTodoList");
 let search = document.getElementById("search");
 let progressFeedBack = document.getElementById("progressFeedBack");
 let progress = document.getElementById("progress");
+let playPauseBtn = document.getElementById("playPauseBtn");
+let cancelBtn = document.getElementById("cancelBtn");
 
 function toggleToRegister() {
   authForm.submitAuthForm.innerHTML = "Cadastrar conta";
